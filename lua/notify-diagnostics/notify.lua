@@ -1,5 +1,5 @@
-local utils = require("lsp-notify.utils")
-local tables = require("lsp-notify.tables")
+local utils = require("notify-diagnostics.utils")
+local tables = require("notify-diagnostics.tables")
 
 -- Creates an object for the module.
 local M = {}
@@ -9,7 +9,7 @@ function M.diagnostics()
     -- Get configurations
     local severity_table = tables.severity()
     local icons_table = tables.icons()
-    local config = vim.g.lspnotify_config
+    local config = vim.g.notifydiagnostics_config
 
     -- Clear previous notifications
     local notify = require("notify")

@@ -1,10 +1,10 @@
 -- Imports the plugin's additional Lua modules.
-local notify = require("lsp-notify.notify")
+local notify = require("notify-diagnostics.notify")
 
 -- Default user config
 local function default_options()
     local config = {
-        exclude_codes = {}, -- e.g. E501 = true
+        exclude_codes = {}, -- e.g. {E501 = true}
         severity_levels = {
             info = false,
             hint = false,
@@ -19,30 +19,6 @@ local function default_options()
         autocommands = { "BufEnter", "BufWritePre", "BufWritePost" }
     }
 
-    -- local exclude_codes = {} -- e.g. E501
-    --
-    -- local severity_levels = {} -- info, hint, warn, error
-    -- severity_levels["info"] = false
-    -- severity_levels["hint"] = false
-    -- severity_levels["warn"] = true
-    -- severity_levels["error"] = true
-    --
-    -- local options = {
-    --     title = "LSP diagnostics",
-    --     render = "minimal", -- "default", "minimal", "simple", "compact"
-    --     animate = "static", -- "fade_in_slide_out", "fade", "slide", "static"
-    --     timeout = false -- boolean, int
-    -- }
-    --
-    -- local autocommands = { "BufEnter", "BufWritePre", "BufWritePost" }
-    --
-    -- local config = {
-    --     exclude_codes = exclude_codes,
-    --     severity_levels = severity_levels,
-    --     notify_options = options,
-    --     autocommands = autocommands
-    -- }
-
     return config
 end
 
@@ -53,8 +29,8 @@ end
 local M = {}
 
 M.init = function()
-    if not vim.g.lspnotify_namespace then
-        vim.g.lspnotify_namespace = vim.api.nvim_create_namespace "lspnotify"
+    if not vim.g.notifydiagnostics_namespace then
+        vim.g.notifydiagnostics_namespace = vim.api.nvim_create_namespace "notifydiagnostics"
     end
 end
 
@@ -69,7 +45,7 @@ M.setup = function(user_options)
     end
 
     -- register options
-    vim.g.lspnotify_config = options
+    vim.g.notifydiagnostics_config = options
 
     -- register autocommands
     local autocommands = options.autocommands

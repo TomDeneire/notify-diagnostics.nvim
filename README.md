@@ -1,8 +1,8 @@
-# lsp-notify
+# notify-diagnostics
 
 ## Concept
 
-`lsp-notify` is a Neovim plugin that displays LSP diagnostics with [nvim-notify](...).
+`notify-diagnostics` is a Neovim plugin that displays LSP diagnostics with [nvim-notify](...).
 
 It's functionality and appearence are configurable:
 
@@ -25,10 +25,10 @@ dependencies nvim-notify!
 Include the following in your setup:
 
 ``` lua
-require("lsp-notify").setup()
+require("notify-diagnostics").setup()
 ```
 
-`lsp-notify` comes with the following defaults, which you can alter during setup:
+`notify-diagnostics` comes with the following defaults, which you can alter during setup:
 
 ``` lua
     {

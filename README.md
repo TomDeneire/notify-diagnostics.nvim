@@ -89,7 +89,6 @@ vim.diagnostic.config({ virtual_text = false })
 
 This plugin is still very much in active development. A number of issues remain:
 
-- Icons sometimes disappear with different levels (warning + error)
 - Getting notification refresh snappier
 - Avoiding conflicts with other plugins that use `nvim-notify`
 - Configuring custom colours

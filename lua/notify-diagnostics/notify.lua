@@ -6,31 +6,26 @@ local M = {}
 
 -- Displays LSP diagnostics with nvim-notify
 function M.diagnostics()
-    -- Get configurations
-    local severity_table = tables.severity()
-    local icons_table = tables.icons()
-    local config = vim.g.notifydiagnostics_config
-
     -- Clear previous notifications
     local notify = require("notify")
     notify.dismiss()
 
     -- Handle LSP diagnostic severity_levels
-    for level in pairs(config.severity_levels) do
-        if config.severity_levels[level] == true then
+    for level in pairs(vim.g.notifydiagnostics_config.severity_levels) do
+        if vim.g.notifydiagnostics_config.severity_levels[level] == true then
             local diagnostics = vim.diagnostic.get(
-                0, { severity = severity_table[level] })
+                0, { severity = tables.severity()[level] })
             if diagnostics ~= nil then
                 local notify_textbox = ""
                 for j in pairs(diagnostics) do
                     local diagnostic = diagnostics[j]
                     local code = utils.split(diagnostic.message, " ")
                     local code_clean = string.gsub(code[1], " ", "")
-                    if config.exclude_codes[code_clean] == nil then
+                    if vim.g.notifydiagnostics_config.exclude_codes[code_clean] == nil then
                         local message = utils.insertNewLines(diagnostic.message)
                         local n = ""
-                        if config.notify_options.render == "minimal" then
-                            n = icons_table[level] .. " "
+                        if vim.g.notifydiagnostics_config.notify_options.render == "minimal" then
+                            n = n .. tables.icons()[level] .. " "
                         end
                         n = n .. diagnostic.lnum + 1 .. ": " .. message
                         if j ~= utils.table_length(diagnostics) then
@@ -40,7 +35,7 @@ function M.diagnostics()
                     end
                 end
                 if notify_textbox ~= "" then
-                    _ = notify(notify_textbox, level, config["notify_options"])
+                    _ = notify(notify_textbox, level, vim.g.notifydiagnostics_config["notify_options"])
                 end
             end
         end

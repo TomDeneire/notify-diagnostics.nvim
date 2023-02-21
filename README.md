@@ -91,5 +91,5 @@ This plugin is still very much in active development. A number of issues remain:
 
 - Getting notification refresh snappier
 - Avoiding conflicts with other plugins that use `nvim-notify`
-- Configuring custom colours
+- Configuring custom colours, custom width and max characters, ...
 

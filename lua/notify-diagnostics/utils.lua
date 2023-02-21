@@ -36,14 +36,14 @@ M.insertNewLines = function(message)
     message = string.gsub(message, "\n", " ")
     message = string.gsub(message, "\r\n", " ")
     message = string.gsub(message, "\t", " ")
-    if string.len(message) < 40 then
+    if string.len(message) < 30 then
         return message
     end
     local new_message = ""
     local line = ""
     local words = M.split(message, " ")
     for i in pairs(words) do
-        if string.len(line) > 40 then
+        if string.len(line) > 29 then
             new_message = new_message .. line .. "\n"
             line = ""
         end

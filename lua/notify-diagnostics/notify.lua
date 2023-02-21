@@ -19,9 +19,9 @@ end
 
 -- Displays LSP diagnostics with nvim-notify
 function M.diagnostics()
-    if vim.g.notifydiagnostics_enable == false then
-        return
-    end
+    -- if vim.g.notifydiagnostics_enable == false then
+    --     return
+    -- end
     local config =
     {
         minimum_width = 40,

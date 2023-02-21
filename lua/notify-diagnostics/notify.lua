@@ -24,8 +24,8 @@ function M.diagnostics()
     end
     local config =
     {
-        minimum_width = 30,
-        max_width = 30,
+        minimum_width = 40,
+        max_width = 40,
     }
     local notify = require("notify").instance(config)
 

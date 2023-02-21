@@ -4,8 +4,24 @@ local tables = require("notify-diagnostics.tables")
 -- Creates an object for the module.
 local M = {}
 
+-- Enable LSP diagnostics
+function M.enable()
+    vim.g.notifydiagnostics_enable = true
+end
+
+-- Enable LSP diagnostics
+function M.disable()
+    -- Clear previous notifications
+    local notify = require("notify")
+    notify.dismiss()
+    vim.g.notifydiagnostics_enable = false
+end
+
 -- Displays LSP diagnostics with nvim-notify
 function M.diagnostics()
+    if vim.g.notifydiagnostics_enable == false then
+        return
+    end
     -- Clear previous notifications
     local notify = require("notify")
     notify.dismiss()

@@ -50,6 +50,9 @@ M.setup = function(user_options)
     -- register options
     vim.g.notifydiagnostics_config = options
 
+    -- enable
+    vim.g.notifydiagnostics_enable = true
+
     -- register autocommands
     local autocommands = options.autocommands
     for i in pairs(autocommands) do
@@ -65,5 +68,7 @@ end
 -- M.diagnostics = notify.diagnostics
 
 M.diagnostics = notify.diagnostics
+M.enable = notify.enable
+M.disable = notify.disable
 
 return M

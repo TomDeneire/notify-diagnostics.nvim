@@ -18,3 +18,5 @@ exe "lua package.path = package.path .. ';" . s:lua_rocks_deps_loc . "/lua-?/ini
 
 " Exposes the plugin's functions for use as commands in Neovim.
 command! -nargs=0 Notifylspdiagnostics lua require("notify-diagnostics").diagnostics()
+command! -nargs=0 Notifylspenable lua require("notify-diagnostics").enable()
+command! -nargs=0 Notifylspdisable lua require("notify-diagnostics").disable()

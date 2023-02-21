@@ -35,11 +35,25 @@ function M.diagnostics()
                     end
                 end
                 if notify_textbox ~= "" then
-                    _ = notify(notify_textbox, level, vim.g.notifydiagnostics_config["notify_options"])
+                    local record_id = vim.g.notifydiagnostics_config.records[level]
+                    vim.g.notifydiagnostics_config["notify_options"]["replace"] = record_id
+                    local record = notify(notify_textbox, level,
+                        vim.g.notifydiagnostics_config["notify_options"])
+                    vim.g.notifydiagnostics_config.records[level] = record.id
                 end
             end
         end
     end
 end
+
+-- function Test()
+--     local notify = require("notify")
+--     local level = "warn"
+--     vim.g.notifydiagnostics_config["notify_options"]["replace"] = vim.g.notifydiagnostics_config
+--         .records[level]
+--     print(vim.g.notifydiagnostics_config.records[level])
+--     local record = notify("test", level, vim.g.notifydiagnostics_config["notify_options"])
+--     vim.g.notifydiagnostics_config.records[level] = record.id
+-- end
 
 return M

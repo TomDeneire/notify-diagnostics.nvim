@@ -3,7 +3,7 @@ local notify = require("notify-diagnostics.notify")
 
 -- Default user config
 local function default_options()
-    local config = {
+    local options = {
         exclude_codes = {}, -- e.g. {E501 = true}
         severity_levels = {
             info = false,
@@ -19,7 +19,7 @@ local function default_options()
         autocommands = { "BufEnter", "BufWritePre", "BufWritePost" }
     }
 
-    return config
+    return options
 end
 
 -- Creates an object for the module. All of the module's
@@ -43,6 +43,9 @@ M.setup = function(user_options)
             options[k] = v
         end
     end
+
+    -- add default notification records
+    options.records = { info = nil, hint = nil, warn = nil, error = nil }
 
     -- register options
     vim.g.notifydiagnostics_config = options

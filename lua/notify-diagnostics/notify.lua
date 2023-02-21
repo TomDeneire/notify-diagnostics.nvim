@@ -22,12 +22,7 @@ function M.diagnostics()
     -- if vim.g.notifydiagnostics_enable == false then
     --     return
     -- end
-    local config =
-    {
-        minimum_width = 40,
-        max_width = 40,
-    }
-    local notify = require("notify").instance(config)
+    local notify = require("notify")
 
     -- Clear previous notifications
     notify.dismiss()

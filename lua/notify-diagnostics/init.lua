@@ -53,6 +53,9 @@ M.setup = function(user_options)
     -- enable
     vim.g.notifydiagnostics_enable = true
 
+    local max_width = math.floor(vim.o.columns * 0.75)
+    require("notify").setup({ max_width = max_width })
+    -- register commands
     local autocommands = options.autocommands
     for i in pairs(autocommands) do
         local autocmd = autocommands[i]

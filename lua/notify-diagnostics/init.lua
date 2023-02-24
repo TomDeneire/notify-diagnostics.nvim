@@ -2,6 +2,7 @@
 local notify = require("notify-diagnostics.notify")
 
 -- Default user config
+dd
 local function default_options()
     local options = {
         exclude_codes = {}, -- e.g. {E501 = true}
@@ -66,7 +67,7 @@ M.setup = function(user_options)
             WARN = ""
         },
         level = 2,
-        minimum_width = 50,
+        minimum_width = 10,
         max_width = 10,
         render = "default",
         stages = "fade_in_slide_out",

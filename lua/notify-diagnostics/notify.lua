@@ -22,7 +22,8 @@ function M.diagnostics()
     -- if vim.g.notifydiagnostics_enable == false then
     --     return
     -- end
-    local notify = require("notify")
+    local notify = vim.g.notifydiagnostics_instance
+    --local notify = require("notify")
 
     -- Clear previous notifications
     notify.dismiss()

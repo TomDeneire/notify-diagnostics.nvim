@@ -14,8 +14,6 @@ local function default_options()
             title = "LSP diagnostics",
             render = "minimal", -- "default", "minimal", "simple", "compact"
             animate = "static", -- "fade_in_slide_out", "fade", "slide", "static"
-            max_width = 10,
-            minimum_width = 10,
             timeout = false -- boolean, int
         },
         autocommands = { "BufEnter", "BufWritePre", "BufWritePost" }

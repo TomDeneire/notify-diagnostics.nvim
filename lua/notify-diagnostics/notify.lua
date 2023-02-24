@@ -23,7 +23,25 @@ function M.diagnostics()
     --     return
     -- end
     local notify = require("notify")
-
+    notify.setup(
+        {
+            background_colour = "Normal",
+            fps = 30,
+            icons = {
+                DEBUG = "",
+                ERROR = "",
+                INFO = "",
+                TRACE = "✎",
+                WARN = ""
+            },
+            level = 2,
+            max_width = 10,
+            minimum_width = 10,
+            render = "default",
+            stages = "fade_in_slide_out",
+            timeout = 5000,
+            top_down = true
+        })
     -- Clear previous notifications
     notify.dismiss()
 

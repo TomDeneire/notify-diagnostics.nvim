@@ -53,6 +53,28 @@ M.setup = function(user_options)
     -- enable
     vim.g.notifydiagnostics_enable = true
 
+    -- dedicated notify instance
+    local config =
+    {
+        background_colour = "Normal",
+        fps = 30,
+        icons = {
+            DEBUG = "",
+            ERROR = "",
+            INFO = "",
+            TRACE = "✎",
+            WARN = ""
+        },
+        level = 2,
+        minimum_width = 50,
+        max_width = 10,
+        render = "default",
+        stages = "fade_in_slide_out",
+        timeout = 5000,
+        top_down = true
+    }
+    vim.g.notifydiagnostics_instance = require("notify").instance(config, false)
+
     -- register autocommands
     local autocommands = options.autocommands
     for i in pairs(autocommands) do

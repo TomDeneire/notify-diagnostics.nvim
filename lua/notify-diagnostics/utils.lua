@@ -32,18 +32,18 @@ M.table_length = function(mytable)
 end
 
 -- Split up longer lines by inserting newlines
-M.insertNewLines = function(message)
+M.insertNewLines = function(message, max_width)
     message = string.gsub(message, "\n", " ")
     message = string.gsub(message, "\r\n", " ")
     message = string.gsub(message, "\t", " ")
-    if string.len(message) < 30 then
+    if string.len(message) < max_width then
         return message
     end
     local new_message = ""
     local line = ""
     local words = M.split(message, " ")
     for i in pairs(words) do
-        if string.len(line) > 29 then
+        if string.len(line) > (max_width - 1) then
             new_message = new_message .. line .. "\n"
             line = ""
         end

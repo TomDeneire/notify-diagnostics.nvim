@@ -19,29 +19,11 @@ end
 
 -- Displays LSP diagnostics with nvim-notify
 function M.diagnostics()
-    -- if vim.g.notifydiagnostics_enable == false then
-    --     return
-    -- end
+    local get_max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+    end
     local notify = require("notify")
-    notify.setup(
-        {
-            background_colour = "Normal",
-            fps = 30,
-            icons = {
-                DEBUG = "",
-                ERROR = "",
-                INFO = "",
-                TRACE = "✎",
-                WARN = ""
-            },
-            level = 2,
-            max_width = 10,
-            minimum_width = 10,
-            render = "default",
-            stages = "fade_in_slide_out",
-            timeout = 5000,
-            top_down = true
-        })
+    notify.setup({ max_width = get_max_width() })
     -- Clear previous notifications
     notify.dismiss()
 
@@ -57,7 +39,7 @@ function M.diagnostics()
                     local code = utils.split(diagnostic.message, " ")
                     local code_clean = string.gsub(code[1], " ", "")
                     if vim.g.notifydiagnostics_config.exclude_codes[code_clean] == nil then
-                        local message = utils.insertNewLines(diagnostic.message)
+                        local message = utils.insertNewLines(diagnostic.message, get_max_width())
                         local n = ""
                         if vim.g.notifydiagnostics_config.notify_options.render == "minimal" then
                             n = n .. tables.icons()[level] .. " "

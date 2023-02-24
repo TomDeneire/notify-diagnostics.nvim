@@ -35,7 +35,7 @@ function M.diagnostics()
                     local code = utils.split(diagnostic.message, " ")
                     local code_clean = string.gsub(code[1], " ", "")
                     if vim.g.notifydiagnostics_config.exclude_codes[code_clean] == nil then
-                        local message = utils.insertNewLines(diagnostic.message, max_width)
+                        local message = utils.insertNewLines(diagnostic.message, 30)
                         local n = ""
                         if vim.g.notifydiagnostics_config.notify_options.render == "minimal" then
                             n = n .. tables.icons()[level] .. " "

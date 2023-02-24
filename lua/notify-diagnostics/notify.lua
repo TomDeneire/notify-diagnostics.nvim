@@ -19,7 +19,8 @@ end
 
 -- Displays LSP diagnostics with nvim-notify
 function M.diagnostics()
-    local max_width = math.floor(vim.o.columns * 0.75)
+    local cols = vim.o.columns
+    local max_width = math.floor(cols * 0.75)
     local notify = require("notify")
     -- Clear previous notifications
     notify.dismiss()

@@ -23,7 +23,7 @@ function M.diagnostics()
         return math.floor(vim.o.columns * 0.75)
     end
     local notify = require("notify")
-    notify.setup({ max_width = get_max_width() })
+    -- notify.setup({ max_width = get_max_width() })
     -- Clear previous notifications
     notify.dismiss()
 

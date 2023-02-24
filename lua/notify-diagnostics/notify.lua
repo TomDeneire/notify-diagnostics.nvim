@@ -11,7 +11,7 @@ end
 
 -- Enable LSP diagnostics
 function M.disable()
-    local notify = vim.g.notifydiagnostics_instance
+    local notify = require("notify")
     -- Clear previous notifications
     notify.dismiss()
     vim.g.notifydiagnostics_enable = false
@@ -22,8 +22,7 @@ function M.diagnostics()
     -- if vim.g.notifydiagnostics_enable == false then
     --     return
     -- end
-    local notify = vim.g.notifydiagnostics_instance
-    --local notify = require("notify")
+    local notify = require("notify")
 
     -- Clear previous notifications
     notify.dismiss()

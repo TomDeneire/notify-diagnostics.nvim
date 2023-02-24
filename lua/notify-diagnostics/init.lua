@@ -2,6 +2,7 @@
 local notify = require("notify-diagnostics.notify")
 
 -- Default user config
+dd
 local function default_options()
     local options = {
         exclude_codes = {}, -- e.g. {E501 = true}
@@ -14,6 +15,8 @@ local function default_options()
             title = "LSP diagnostics",
             render = "minimal", -- "default", "minimal", "simple", "compact"
             animate = "static", -- "fade_in_slide_out", "fade", "slide", "static"
+            max_width = 10,
+            minimum_width = 10,
             timeout = false -- boolean, int
         },
         autocommands = { "BufEnter", "BufWritePre", "BufWritePost" }
@@ -53,29 +56,6 @@ M.setup = function(user_options)
     -- enable
     vim.g.notifydiagnostics_enable = true
 
-    -- dedicated notify instance
-    local config =
-    {
-        background_colour = "Normal",
-        fps = 30,
-        icons = {
-            DEBUG = "",
-            ERROR = "",
-            INFO = "",
-            TRACE = "✎",
-            WARN = ""
-        },
-        level = 2,
-        minimum_width = 10,
-        max_width = 10,
-        render = "default",
-        stages = "fade_in_slide_out",
-        timeout = 5000,
-        top_down = true
-    }
-    vim.g.notifydiagnostics_instance = require("notify").instance(config, false)
-
-    -- register autocommands
     local autocommands = options.autocommands
     for i in pairs(autocommands) do
         local autocmd = autocommands[i]

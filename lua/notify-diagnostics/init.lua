@@ -2,7 +2,6 @@
 local notify = require("notify-diagnostics.notify")
 
 -- Default user config
-dd
 local function default_options()
     local options = {
         exclude_codes = {}, -- e.g. {E501 = true}

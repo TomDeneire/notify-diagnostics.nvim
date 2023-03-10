@@ -22,7 +22,7 @@ The plugin can be configured in several ways.
 
 - You can configure which diagnostics are displayed (e.g. only errors).
 - You can exclude certain error codes (e.g. E501 - line too long).
-- You can determine which events (e.g. `BufPostWrite`) trigger a notification refresh.
+- You can determine which events (e.g. `BufWritePost`) trigger a notification refresh.
 - You can set a timeout for the notication to 
 
 ### Appearance
@@ -75,7 +75,7 @@ return {
             animate = "static", -- "fade_in_slide_out", "fade", "slide", "static"
             timeout = false -- boolean, int
         },
-        autocommands = { "BufEnter", "BufWritePre", "BufWritePost" }
+        autocommands = { "BufEnter", "InsertLeave", "BufWritePost" }
     }
 ```
 

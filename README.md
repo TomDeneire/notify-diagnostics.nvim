@@ -57,13 +57,7 @@ return {
 ```
 
 
-## Setup and default settings
-
-Include the following in your setup:
-
-``` lua
-    require("notify-diagnostics").setup()
-```
+## Default settings
 
 `notify-diagnostics` comes with the following defaults, which you can alter during setup:
 

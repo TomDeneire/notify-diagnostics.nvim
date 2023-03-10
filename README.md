@@ -40,11 +40,20 @@ See below "default settings", for the full list of options and/or consult `h: no
 
 (Be advised that this plugin needs `rcarriga/nvim-notify` to be installed.
 
-With VimPlug:
+With Lazy package manager:
 
-```vim
-    Plug 'rcarriga/nvim-notify'
-    Plug 'tomdeneire/notify-diagnostics'
+```lua
+return {
+    'tomdeneire/notify-diagnostics.nvim',
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { 'rcarriga/nvim-notify' },
+    branch = "main",
+    config = function()
+        require("notify-diagnostics").setup()
+        local max_width = math.floor(vim.o.columns * 0.25)
+        require("notify").setup({ max_width = max_width })
+    end
+}
 ```
 
 
@@ -91,5 +100,5 @@ This plugin is still very much in active development. A number of issues remain:
 
 - Getting notification refresh snappier
 - Avoiding conflicts with other plugins that use `nvim-notify`
-- Configuring custom colours, custom width and max characters, ...
+- Configuring custom layout
 

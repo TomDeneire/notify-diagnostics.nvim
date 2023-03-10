@@ -59,4 +59,14 @@ function M.diagnostics()
     end
 end
 
+-- function Test()
+--     local notify = require("notify")
+--     local level = "warn"
+--     vim.g.notifydiagnostics_config["notify_options"]["replace"] = vim.g.notifydiagnostics_config
+--         .records[level]
+--     print(vim.g.notifydiagnostics_config.records[level])
+--     local record = notify("test", level, vim.g.notifydiagnostics_config["notify_options"])
+--     vim.g.notifydiagnostics_config.records[level] = record.id
+-- end
+
 return M

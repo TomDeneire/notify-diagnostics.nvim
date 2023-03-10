@@ -44,9 +44,13 @@ M.insertNewLines = function(message, max_width)
     local new_message = ""
     local line = ""
     local words = M.split(message, " ")
-    -- factor accounts for length of line number and icon
-    local max_length = max_width - 6
+    local line_count = 1
     for i in pairs(words) do
+        local max_length = max_width
+        if line_count == 1 then
+            -- factor accounts for length of line number and icon on first line
+            max_length = max_length - 6
+        end
         local next_word = words[i]
         local next_word_length = string.len(next_word)
         local line_length = string.len(line)
@@ -57,9 +61,11 @@ M.insertNewLines = function(message, max_width)
             if next_word_length > max_length then
                 new_message = new_message .. "\n" .. line .. "\n" .. string.sub(next_word, 1, max_length)
                 line = string.sub(next_word, max_length + 1, string.len(next_word))
+                line_count = line_count + 1
             else
                 new_message = new_message .. "\n" .. line
                 line = next_word
+                line_count = line_count + 1
             end
         end
     end

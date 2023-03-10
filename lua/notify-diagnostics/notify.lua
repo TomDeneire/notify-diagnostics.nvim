@@ -4,10 +4,23 @@ local tables = require("notify-diagnostics.tables")
 -- Creates an object for the module.
 local M = {}
 
+-- Enable LSP diagnostics
+function M.enable()
+    vim.g.notifydiagnostics_enable = true
+end
+
+-- Enable LSP diagnostics
+function M.disable()
+    local notify = require("notify")
+    -- Clear previous notifications
+    notify.dismiss()
+    vim.g.notifydiagnostics_enable = false
+end
+
 -- Displays LSP diagnostics with nvim-notify
 function M.diagnostics()
-    -- Clear previous notifications
     local notify = require("notify")
+    -- Clear previous notifications
     notify.dismiss()
 
     -- Handle LSP diagnostic severity_levels
@@ -22,7 +35,7 @@ function M.diagnostics()
                     local code = utils.split(diagnostic.message, " ")
                     local code_clean = string.gsub(code[1], " ", "")
                     if vim.g.notifydiagnostics_config.exclude_codes[code_clean] == nil then
-                        local message = utils.insertNewLines(diagnostic.message)
+                        local message = utils.insertNewLines(diagnostic.message, math.floor(vim.o.columns * 0.25))
                         local n = ""
                         if vim.g.notifydiagnostics_config.notify_options.render == "minimal" then
                             n = n .. tables.icons()[level] .. " "
@@ -35,7 +48,11 @@ function M.diagnostics()
                     end
                 end
                 if notify_textbox ~= "" then
-                    _ = notify(notify_textbox, level, vim.g.notifydiagnostics_config["notify_options"])
+                    local record_id = vim.g.notifydiagnostics_config.records[level]
+                    vim.g.notifydiagnostics_config["notify_options"]["replace"] = record_id
+                    local record = notify(notify_textbox, level,
+                        vim.g.notifydiagnostics_config["notify_options"])
+                    vim.g.notifydiagnostics_config.records[level] = record.id
                 end
             end
         end

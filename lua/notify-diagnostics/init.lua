@@ -16,7 +16,7 @@ local function default_options()
             animate = "static", -- "fade_in_slide_out", "fade", "slide", "static"
             timeout = false -- boolean, int
         },
-        autocommands = { "BufEnter", "BufWritePre", "BufWritePost" }
+        autocommands = { "BufReadPost", "InsertLeave" }
     }
 
     return options

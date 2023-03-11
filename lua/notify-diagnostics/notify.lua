@@ -24,8 +24,9 @@ function M.diagnostics()
     notify.dismiss()
 
     -- Handle LSP diagnostic severity_levels
-    for level in pairs(vim.g.notifydiagnostics_config.severity_levels) do
-        if vim.g.notifydiagnostics_config.severity_levels[level] == true then
+    local config = vim.g.notifydiagnostics_config
+    for level in pairs(config.severity_levels) do
+        if config.severity_levels[level] == true then
             local diagnostics = vim.diagnostic.get(
                 0, { severity = tables.severity()[level] })
             if diagnostics ~= nil then
@@ -34,10 +35,10 @@ function M.diagnostics()
                     local diagnostic = diagnostics[j]
                     local code = utils.split(diagnostic.message, " ")
                     local code_clean = string.gsub(code[1], " ", "")
-                    if vim.g.notifydiagnostics_config.exclude_codes[code_clean] == nil then
-                        local message = utils.insertNewLines(diagnostic.message, math.floor(vim.o.columns * 0.25))
+                    if config.exclude_codes[code_clean] == nil then
+                        local message = utils.insertNewLines(diagnostic.message, config.max_width)
                         local n = ""
-                        if vim.g.notifydiagnostics_config.notify_options.render == "minimal" then
+                        if config.notify_options.render == "minimal" then
                             n = n .. tables.icons()[level] .. " "
                         end
                         n = n .. diagnostic.lnum + 1 .. ": " .. message
@@ -48,11 +49,11 @@ function M.diagnostics()
                     end
                 end
                 if notify_textbox ~= "" then
-                    local record_id = vim.g.notifydiagnostics_config.records[level]
-                    vim.g.notifydiagnostics_config["notify_options"]["replace"] = record_id
+                    local record_id = config.records[level]
+                    config["notify_options"]["replace"] = record_id
                     local record = notify(notify_textbox, level,
-                        vim.g.notifydiagnostics_config["notify_options"])
-                    vim.g.notifydiagnostics_config.records[level] = record.id
+                        config["notify_options"])
+                    config.records[level] = record.id
                 end
             end
         end
@@ -62,11 +63,11 @@ end
 -- function Test()
 --     local notify = require("notify")
 --     local level = "warn"
---     vim.g.notifydiagnostics_config["notify_options"]["replace"] = vim.g.notifydiagnostics_config
+--     config["notify_options"]["replace"] = vim.g.notifydiagnostics_config
 --         .records[level]
---     print(vim.g.notifydiagnostics_config.records[level])
---     local record = notify("test", level, vim.g.notifydiagnostics_config["notify_options"])
---     vim.g.notifydiagnostics_config.records[level] = record.id
+--     print(config.records[level])
+--     local record = notify("test", level, config["notify_options"])
+--     config.records[level] = record.id
 -- end
 
 return M

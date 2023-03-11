@@ -5,6 +5,7 @@ local notify = require("notify-diagnostics.notify")
 local function default_options()
     local options = {
         exclude_codes = {}, -- e.g. {E501 = true}
+        max_width = math.floor(vim.o.columns * 0.25),
         severity_levels = {
             info = false,
             hint = false,

@@ -49,8 +49,8 @@ return {
     dependencies = { 'rcarriga/nvim-notify' },
     branch = "main",
     config = function()
-        require("notify-diagnostics").setup()
         local max_width = math.floor(vim.o.columns * 0.25)
+        require("notify-diagnostics").setup({max_width = max_width})
         require("notify").setup({ max_width = max_width })
     end
 }
@@ -64,6 +64,7 @@ return {
 ``` lua
     {
         exclude_codes = {}, -- e.g. {E501 = true}
+        max_width = math.floor(vim.o.columns * 0.25),
         severity_levels = {
             info = false,
             hint = false,

@@ -89,5 +89,4 @@ function Test()
     print(M.insertNewLines(message, max_width))
 end
 
-Test()
 return M

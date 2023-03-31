@@ -36,16 +36,16 @@ function M.diagnostics()
                     local code = utils.split(diagnostic.message, " ")
                     local code_clean = string.gsub(code[1], " ", "")
                     if config.exclude_codes[code_clean] == nil then
-                        local message = utils.insertNewLines(diagnostic.message, config.max_width)
-                        local n = ""
+                        local message = ""
                         if config.notify_options.render == "minimal" then
-                            n = n .. tables.icons()[level] .. " "
+                            message = message .. tables.icons()[level] .. " "
                         end
-                        n = n .. diagnostic.lnum + 1 .. ": " .. message
+                        message = message .. diagnostic.lnum + 1 .. ": " .. diagnostic.message
+                        message = utils.insertNewLines(message, config.max_width)
                         if j ~= utils.table_length(diagnostics) then
-                            n = n .. "\n"
+                            message = message .. "\n"
                         end
-                        notify_textbox = notify_textbox .. n
+                        notify_textbox = notify_textbox .. message
                     end
                 end
                 if notify_textbox ~= "" then

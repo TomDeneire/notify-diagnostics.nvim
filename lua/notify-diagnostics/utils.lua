@@ -47,10 +47,6 @@ M.insertNewLines = function(message, max_width)
     local line_count = 1
     for i in pairs(words) do
         local max_length = max_width
-        if line_count == 1 then
-            -- factor accounts for length of line number and icon on first line
-            max_length = max_length - 6
-        end
         local next_word = words[i]
         local next_word_length = string.len(next_word)
         local line_length = string.len(line)
@@ -87,10 +83,11 @@ M.insertNewLines = function(message, max_width)
 end
 
 function Test()
-    local max_width = math.floor(vim.o.columns * 0.25)
+    local max_width = 53
     local message =
-    [[packageListCmd.Flags().BoolVar(&Fremote, "remote", true, "Search files on development server") (no value) used as value or type]]
+    [[Cyclomatic complexity too high: 15 (threshold 15)]]
     print(M.insertNewLines(message, max_width))
 end
 
+Test()
 return M

@@ -10,14 +10,15 @@ local function default_options()
             info = false,
             hint = false,
             warn = true,
-            error = true },
+            error = true
+        },
         notify_options = {
             title = "LSP diagnostics",
             render = "minimal", -- "default", "minimal", "simple", "compact"
             animate = "static", -- "fade_in_slide_out", "fade", "slide", "static"
-            timeout = false -- boolean, int
+            timeout = false     -- boolean, int
         },
-        autocommands = { "BufReadPost", "BufWritePost", "InsertLeave" }
+        autocommands = { "BufReadPost", "BufWinEnter", "BufWritePost", "InsertLeave" }
     }
 
     return options

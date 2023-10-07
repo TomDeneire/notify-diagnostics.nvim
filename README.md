@@ -76,7 +76,7 @@ return {
             animate = "static", -- "fade_in_slide_out", "fade", "slide", "static"
             timeout = false -- boolean, int
         },
-        autocommands = { "BufEnter", "InsertLeave", "BufWritePost" }
+        autocommands = { "BufReadPost", "BufWinEnter", "BufWritePost", "InsertLeave" }
     }
 ```
 

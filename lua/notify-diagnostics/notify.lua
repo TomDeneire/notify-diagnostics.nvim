@@ -25,6 +25,7 @@ function M.diagnostics()
 
     -- Handle LSP diagnostic severity_levels
     local config = vim.g.notifydiagnostics_config
+    local max = 10
     for level in pairs(config.severity_levels) do
         if config.severity_levels[level] == true then
             local diagnostics = vim.diagnostic.get(
@@ -51,7 +52,14 @@ function M.diagnostics()
                         notify_diagnostics[diagnostic.lnum + unique_count] = message
                     end
                 end
+                local message_count = 0
                 for _, diagnostic in pairs(notify_diagnostics) do
+                    message_count = message_count + 1
+                    if message_count == max then
+                        local moreinfo = "(" .. #notify_diagnostics - max .. " more messages"
+                        notify_textbox = notify_textbox .. moreinfo
+                        break
+                    end
                     notify_textbox = notify_textbox .. diagnostic
                 end
                 if notify_textbox ~= "" then

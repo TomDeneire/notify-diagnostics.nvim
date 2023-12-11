@@ -31,6 +31,8 @@ function M.diagnostics()
                 0, { severity = tables.severity()[level] })
             if diagnostics ~= nil then
                 local notify_textbox = ""
+                local notify_diagnostics = {}
+                local unique_count = 0
                 for j in pairs(diagnostics) do
                     local diagnostic = diagnostics[j]
                     local code = utils.split(diagnostic.message, " ")
@@ -45,8 +47,12 @@ function M.diagnostics()
                         if j ~= utils.table_length(diagnostics) then
                             message = message .. "\n"
                         end
-                        notify_textbox = notify_textbox .. message
+                        unique_count = unique_count + 1
+                        notify_diagnostics[diagnostic.lnum + unique_count] = message
                     end
+                end
+                for _, diagnostic in pairs(notify_diagnostics) do
+                    notify_textbox = notify_textbox .. diagnostic
                 end
                 if notify_textbox ~= "" then
                     local record_id = config.records[level]
